@@ -82,10 +82,113 @@
 					"__type" : "snippets",
 					"items" : [
 						{
-							"__type" : "pharoSnippet",
+							"__type" : "textSnippet",
 							"children" : {
 								"__type" : "snippets",
-								"items" : [ ]
+								"items" : [
+									{
+										"__type" : "pharoSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:03:19.078516+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:27:45.32595+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "jxKUYJiFDQCVUBaGC60ozQ=="
+										},
+										"code" : "pythonFiles := root allFiles select: [:each | each extension = 'py']."
+									},
+									{
+										"__type" : "pharoSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:28:59.847197+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:29:05.856563+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "PVZqvJiFDQCVVwklC60ozQ=="
+										},
+										"code" : "pythonFiles sum: [:each | each contents lines size]"
+									},
+									{
+										"__type" : "pharoSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:14:50.780572+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2021-08-10T18:17:48.059055+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "vpvOiZiFDQCVUobwC60ozQ=="
+										},
+										"code" : "notEmptyInits := pythonFiles select: [:each | each basename = '__init__.py' and: [each size isZero not ]]"
+									}
+								]
 							},
 							"createEmail" : {
 								"__type" : "email",
@@ -95,7 +198,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:03:19.078516+02:00"
+									"dateAndTimeString" : "2021-08-12T21:53:16.747031+02:00"
 								}
 							},
 							"editEmail" : {
@@ -106,82 +209,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:27:45.32595+02:00"
+									"dateAndTimeString" : "2021-08-12T21:53:26.827815+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "jxKUYJiFDQCVUBaGC60ozQ=="
+								"uidString" : "IZKg0sOFDQCgNpQfA740rA=="
 							},
-							"code" : "pythonFiles := root allFiles select: [:each | each extension = 'py']."
-						},
-						{
-							"__type" : "pharoSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
+							"paragraphStyle" : {
+								"__type" : "textStyle"
 							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:28:59.847197+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:29:05.856563+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "PVZqvJiFDQCVVwklC60ozQ=="
-							},
-							"code" : "pythonFiles sum: [:each | each contents lines size]"
-						},
-						{
-							"__type" : "pharoSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:14:50.780572+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-10T18:17:48.059055+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "vpvOiZiFDQCVUobwC60ozQ=="
-							},
-							"code" : "notEmptyInits := pythonFiles select: [:each | each basename = '__init__.py' and: [each size isZero not ]]"
+							"string" : "##Overview"
 						},
 						{
 							"__type" : "textSnippet",
@@ -361,14 +399,14 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2021-08-10T23:41:57.030512+02:00"
+															"dateAndTimeString" : "2021-08-13T00:06:06.620118+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
 														"uidString" : "xNPBl5uFDQCVh6vKC60ozQ=="
 													},
-													"code" : "filesWithDetection := detectedAsts collect: [:each | each topParent filename ].\rGtNestedRectangleTreeMap new\r\t\t\t\ttree: root;\r\t\t\t\tdeep: [ :anItem | anItem directories ];\r\t\t\t\tleaves: [ :anItem | anItem files select: [:each | each extension = 'py'] ];\r\t\t\t\tleavesSize: [ :aLeaf | 1 ];\r\t\t\t\tcontainerElement: [ :anElement :aNodeContext | \r\t\t\t\t\t| label scaledLabel |\r\t\t\t\t\taNodeContext level = 2 ifTrue: [\r\t\t\t\t\tlabel := BlTextElement new \r\t\t\t\t\t\ttext: (aNodeContext model basename asRopedText\r\t\t\t\t\t\t\tforeground: (Color black alpha: 0.8)).\r\t\t\t\t\tscaledLabel := label asScalableElement \r\t\t\t\t\t\tzIndex: 10; \r\t\t\t\t\t\tconstraintsDo: [:c | \r\t\t\t\t\t\t\tc horizontal matchParent. \r\t\t\t\t\t\t\tc vertical matchParent. \r\t\t\t\t\t\t\tc ignoreByLayout.\r\t\t\t\t\t\t\tc ignored horizontal weight: 0.2.\r\t\t\t\t\t\t\tc ignored horizontal alignCenter].\r\t\t\t\t\tanElement addChild: scaledLabel].\r\t\t\t\t\tanElement border: (BlBorder paint: (Color black alpha: 0.5 / aNodeContext level) width: 2).\r\t\t\t\t\tanElement padding: (BlInsets all: 2) ];\r\t\t\t\tleafElement: [ :anElement :aLeafContext | \r\t\t\t\t\t(filesWithDetection includes: aLeafContext model fullName) ifTrue: [anElement background: (Color red)] ifFalse: [\r\t\t\t\t\tanElement background: (Color white )] ] "
+													"code" : "filesWithDetection := detectedAsts collect: [:each | each topParent filename ].\rGtNestedRectangleTreeMap new\r\t\t\t\ttree: root;\r\t\t\t\tdeep: [ :anItem | anItem directories ];\r\t\t\t\tleaves: [ :anItem | anItem files select: [:each | each extension = 'py'] ];\r\t\t\t\tleavesSize: [ :aLeaf | 1 ];\r\t\t\t\tcontainerElement: [ :anElement :aNodeContext | \r\t\t\t\t\t| label scaledLabel |\r\t\t\t\t\taNodeContext level = 2 ifTrue: [\r\t\t\t\t\tlabel := BlTextElement new \r\t\t\t\t\t\ttext: (aNodeContext model basename asRopedText\r\t\t\t\t\t\t\tforeground: (Color black alpha: 0.8)).\r\t\t\t\t\tscaledLabel := label asScalableElement \r\t\t\t\t\t\tzIndex: 10; \r\t\t\t\t\t\tconstraintsDo: [:c | \r\t\t\t\t\t\t\tc horizontal matchParent. \r\t\t\t\t\t\t\tc vertical matchParent. \r\t\t\t\t\t\t\tc ignoreByLayout.\r\t\t\t\t\t\t\tc ignored horizontal weight: 0.2.\r\t\t\t\t\t\t\tc ignored horizontal alignCenter].\r\t\t\t\t\tanElement addChild: scaledLabel].\r\t\t\t\t\tanElement border: (BlBorder paint: (Color black alpha: 0.5 / aNodeContext level) width: 2).\r\t\t\t\t\tanElement padding: (BlInsets all: 2) ];\r\t\t\t\tleafElement: [ :anElement :aLeafContext | \r\t\t\t\t\tdetectedAsts \r\t\t\t\t\t\tdetect: [:each | each topParent filename = aLeafContext model fullName]\r\t\t\t\t\t\tifFound: [ :each| anElement background: (Color red); when: BlClickEvent do: [:e | e target phlow spawnObject: each ] ] \r\t\t\t\t\t\tifNone: [ anElement background: (Color white )] ]   "
 												}
 											]
 										},
