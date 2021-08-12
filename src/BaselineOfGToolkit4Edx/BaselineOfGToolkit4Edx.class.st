@@ -1,6 +1,6 @@
 Class {
 	#name : #BaselineOfGToolkit4Edx,
-	#superclass : #Object,
+	#superclass : #BaselineOf,
 	#category : #BaselineOfGToolkit4Edx
 }
 
