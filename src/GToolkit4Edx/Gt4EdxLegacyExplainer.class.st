@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'source'
 	],
-	#category : #GToolkit4Edx
+	#category : #'GToolkit4Edx-Explainer'
 }
 
 { #category : #'instance creation' }

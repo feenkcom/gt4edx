@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fileSystem'
 	],
-	#category : #GToolkit4Edx
+	#category : #'GToolkit4Edx-Slides'
 }
 
 { #category : #switch }
