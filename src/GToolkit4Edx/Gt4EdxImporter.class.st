@@ -161,23 +161,23 @@ Gt4EdxImporter >> importCommentToggles: aNode [
 					toggle := self ensureToggleNamed: name.
 					(self firstNodeAfter: each last in: aNode)
 						ifNotNil: [ :node | 
+							| j famixComment |
+							j := i.
+							[ j <= aNode comments size
+								and: [ (aNode comments at: j) first < node startPosition ] ]
+								whileTrue: [ j := j + 1 ].
+							i to: (j min: aNode comments size) do: [ :k | 
+								famixComment := FAMIXComment new.
+								famixComment
+									content:
+										(source
+											copyFrom: (aNode comments at: k) first
+											to: (aNode comments at: k) last).
+								model add: famixComment.
+								currentFile addEntity: famixComment.
+								toggle addComment: famixComment ].
 							(self importConstructedToggles: node named: name)
-								ifFalse: [ | j famixComment |
-									j := i.
-									[ j <= aNode comments size
-										and: [ (aNode comments at: j) first < node startPosition ] ]
-										whileTrue: [ j := j + 1 ].
-									i to: (j min: aNode comments size) do: [ :k | 
-										famixComment := FAMIXComment new.
-										famixComment
-											content:
-												(source
-													copyFrom: (aNode comments at: k) first
-													to: (aNode comments at: k) last).
-										model add: famixComment.
-										currentFile addEntity: famixComment.
-										toggle addComment: famixComment ].
-									self addSourceFor: node to: toggle.
+								ifFalse: [ self addSourceFor: node to: toggle.
 									self registerSearchForNode: node to: toggle ] ] ] ]
 ]
 
