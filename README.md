@@ -1,5 +1,11 @@
-# Glamorous Toolkit for edx
-A repository dedicated to analyses of the open edx 
+# Glamorous Toolkit for openEdx
+A repository dedicated to analyses of the [openEdx](https://github.com/edx)
+
+## Install
+
+Install [Glamorous Toolkit](https://gtoolkit.com).
+
+Then open a Playground and load the code by execution:
 
 ```
 Metacello new
