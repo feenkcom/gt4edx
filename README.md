@@ -1,5 +1,5 @@
 # Glamorous Toolkit for openEdx
-A repository dedicated to analyses of the [openEdx](https://github.com/edx)
+A repository dedicated to analyses of [openEdx](https://github.com/edx).
 
 ## Install
 
