@@ -1,4 +1,4 @@
-# gt4edx
+# Glamorous Toolkit for edx
 A repository dedicated to analyses of the open edx 
 
 ```
