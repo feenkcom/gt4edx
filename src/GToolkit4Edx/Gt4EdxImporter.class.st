@@ -6,7 +6,9 @@ Class {
 		'currentFile',
 		'files',
 		'folders',
-		'toggles'
+		'toggles',
+		'stringSearches',
+		'variableSearches'
 	],
 	#category : #'GToolkit4Edx-Importer'
 }
@@ -52,10 +54,23 @@ Gt4EdxImporter >> createToggle: aNode named: aString [
 	toggle := self ensureToggleNamed: name.
 	aNode attributeNamed: #toggle put: toggle.
 	currentFile addEntity: toggle.
-	aNode parent attributeNamed: #toggle put: toggle.
 	self storeAST: aNode parent into: toggle.
 	self addSourceFor: aNode parent to: toggle.
+	aNode parent trailers size > 1
+		ifTrue: [ self createUse: aNode parent trailers second of: toggle ]
+		ifFalse: [ self registerSearchForNode: aNode parent parent to: toggle ].
 	^ true
+]
+
+{ #category : #importing }
+Gt4EdxImporter >> createUse: useNode of: toggle [
+	| use |
+	use := Gt4EdxToggleUse new.
+	model add: use.
+	currentFile addEntity: use.
+	use definition: toggle.
+	self storeAST: useNode into: use.
+	self addSourceFor: useNode to: use
 ]
 
 { #category : #importing }
@@ -127,17 +142,9 @@ Gt4EdxImporter >> firstNodeAfter: anInteger in: aNode [
 ]
 
 { #category : #importing }
-Gt4EdxImporter >> importAST: aNode [
-	currentFile := self ensureFileNamed: aNode filename asFileReference.
-	aNode attributeNamed: #entity put: currentFile.
-	self storeAST: aNode into: currentFile.
-	self importCommentToggles: aNode.
-	self importConstructedToggles: aNode named: nil
-]
-
-{ #category : #importing }
 Gt4EdxImporter >> importASTs: aCollection [
-	aCollection do: [ :each | self importAST: each ]
+	aCollection do: [ :each | self importTogglesIn: each ].
+	aCollection do: [ :each | self importUsesIn: each ]
 ]
 
 { #category : #importing }
@@ -155,7 +162,8 @@ Gt4EdxImporter >> importCommentToggles: aNode [
 					(self firstNodeAfter: each last in: aNode)
 						ifNotNil: [ :node | 
 							(self importConstructedToggles: node named: name)
-								ifFalse: [ self addSourceFor: node to: toggle ] ] ] ]
+								ifFalse: [ self addSourceFor: node to: toggle.
+									self registerSearchForNode: node to: toggle ] ] ] ]
 ]
 
 { #category : #importing }
@@ -171,13 +179,42 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 	^ created
 ]
 
+{ #category : #importing }
+Gt4EdxImporter >> importTogglesIn: aNode [
+	currentFile := self ensureFileNamed: aNode filename asFileReference.
+	aNode attributeNamed: #entity put: currentFile.
+	self storeAST: aNode into: currentFile.
+	self importCommentToggles: aNode.
+	self importConstructedToggles: aNode named: nil
+]
+
+{ #category : #importing }
+Gt4EdxImporter >> importUsesIn: aNode [
+	currentFile := self ensureFileNamed: aNode filename asFileReference.
+	aNode
+		allNodesDo: [ :each | 
+			(each isKindOf: PySymbolNode)
+				ifTrue: [ (variableSearches at: each source ifAbsent: [ #() ])
+						do: [ :toggle | self createUse: each of: toggle ] ].
+			((each isKindOf: PyTrailerNode) and: [ each nameToken notNil ])
+				ifTrue: [ (variableSearches at: each nameToken source ifAbsent: [ #() ])
+						do: [ :toggle | self createUse: each of: toggle ] ].
+			(each isKindOf: PyStringNode)
+				ifTrue: [ (stringSearches
+						at: (self removeQuotes: each value source)
+						ifAbsent: [ #() ])
+						do: [ :toggle | self createUse: each of: toggle ] ] ]
+]
+
 { #category : #initialization }
 Gt4EdxImporter >> initialize [
 	super initialize.
 	model := MooseModel new.
 	folders := Dictionary new.
 	files := Dictionary new.
-	toggles := Dictionary new
+	toggles := Dictionary new.
+	stringSearches := Dictionary new.
+	variableSearches := Dictionary new
 ]
 
 { #category : #accessing }
@@ -207,6 +244,41 @@ Gt4EdxImporter >> parseFile: aFile [
 ]
 
 { #category : #importing }
+Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
+	| node |
+	node := aNode.
+	(node isKindOf: PySimpleStmtNode)
+		ifTrue: [ node := node stmts first ].
+	(node isKindOf: PyDictorsetmakerNode)
+		ifTrue: [ node := node test ].
+	(node isKindOf: PyMoreTestsNode)
+		ifTrue: [ node := node test ].
+	(node isKindOf: PyReturnNode)
+		ifTrue: [ node := node parentOfType: PyFuncdefNode ].
+	((node isKindOf: PyExprStmtNode) and: [ node assigns notEmpty ])
+		ifTrue: [ ^ (variableSearches
+				at: node testlist source
+				ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
+	(node isKindOf: PyArgumentNode)
+		ifTrue: [ ^ (variableSearches
+				at: node test source
+				ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
+	(node isKindOf: PyPowerNode)
+		ifTrue: [ (node atom isKindOf: PyStringsNode)
+				ifTrue: [ ^ (stringSearches
+						at: (self removeQuotes: node source)
+						ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
+			(node atom isKindOf: PySymbolNode)
+				ifTrue: [ ^ (variableSearches
+						at: node source
+						ifAbsentPut: [ OrderedCollection new ]) add: toggle ] ].
+	(node isKindOf: PyFuncdefNode)
+		ifTrue: [ ^ (variableSearches
+				at: node fname source
+				ifAbsentPut: [ OrderedCollection new ]) add: toggle ]
+]
+
+{ #category : #importing }
 Gt4EdxImporter >> removeQuotes: aString [
 	^ ('''"' includes: aString first)
 		ifTrue: [ aString copyFrom: 2 to: aString size - 1 ]
@@ -231,6 +303,16 @@ Gt4EdxImporter >> storeAST: aNode into: anEntity [
 Gt4EdxImporter >> toggleNameFrom: aNode [
 	| args |
 	args := aNode trailers first arguments.
+	args size = 5
+		ifTrue: [ aNode atom source = 'ExperimentWaffleFlag'
+				ifTrue: [ ^ (self
+						removeQuotes: (args first test2 ifNil: [ args first test ]) source)
+						, '.'
+						,
+							(self
+								removeQuotes: (args second test2 ifNil: [ args second test ]) source) ]
+				ifFalse: [ ^ self
+						removeQuotes: (self namespaceNameFor: (args first test2 ifNil: [ args first test ])) ] ].
 	(args size = 2 or: [ args size = 5 ])
 		ifTrue: [ ^ self
 				removeQuotes: (self namespaceNameFor: (args first test2 ifNil: [ args first test ])) ].
