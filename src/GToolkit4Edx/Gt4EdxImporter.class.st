@@ -52,6 +52,7 @@ Gt4EdxImporter >> createToggle: aNode named: aString [
 		ifTrue: [ ^ true ].
 	name := aString ifNil: [ self toggleNameFrom: aNode parent ].
 	toggle := self ensureToggleNamed: name.
+	toggle type: aNode nameToken source asSymbol.
 	aNode attributeNamed: #toggle put: toggle.
 	currentFile addEntity: toggle.
 	self storeAST: aNode parent into: toggle.

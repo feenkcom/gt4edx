@@ -2,7 +2,8 @@ Class {
 	#name : #Gt4EdxToggleDefinition,
 	#superclass : #FAMIXNamedEntity,
 	#instVars : [
-		'uses'
+		'uses',
+		'type'
 	],
 	#category : #'GToolkit4Edx-Model'
 }
@@ -10,7 +11,23 @@ Class {
 { #category : #accessing }
 Gt4EdxToggleDefinition >> initialize [
 	super initialize.
+	type := #DjangoSetting.
 	uses := FMMultivalueLink on: self opposite: #definition:
+]
+
+{ #category : #testing }
+Gt4EdxToggleDefinition >> isLegacy [
+	^ type beginsWith: 'Legacy'
+]
+
+{ #category : #accessing }
+Gt4EdxToggleDefinition >> type [
+	^ type
+]
+
+{ #category : #accessing }
+Gt4EdxToggleDefinition >> type: aSymbol [
+	type := aSymbol
 ]
 
 { #category : #accessing }
