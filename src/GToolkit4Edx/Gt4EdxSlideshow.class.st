@@ -155,11 +155,11 @@ Gt4EdxSlideshow >> sourceEditorFor: aFileReference styler: explainationStyler [
 	look := BrGlamorousCodeEditorAptitude new.
 	sourceElement := BrEditor new.
 	explainationStyler isNil
-		ifTrue: [ styler := PythonParser2 gtStyler ]
-		ifFalse: [ styler := GtCompositeSmaCCASTStyler forParser: PythonParser2.
+		ifTrue: [ styler := PythonParser gtStyler ]
+		ifFalse: [ styler := GtCompositeSmaCCASTStyler forParser: PythonParser.
 			styler
 				stylers:
-					{PythonParser2 gtStyler.
+					{PythonParser gtStyler.
 					explainationStyler} ].
 	look styler: styler.
 	sourceElement
@@ -231,7 +231,7 @@ Gt4EdxSlideshow >> switchSlideFor: aSlide [
 
 { #category : 'switch' }
 Gt4EdxSlideshow >> switchStyler [
-	^ (GtSmaCCParserStyler forParser: PythonParser2)
+	^ (GtSmaCCParserStyler forParser: PythonParser)
 		stylerRules:
 			{(GtSmaCCNodeStylerRule
 				nodeClassName: #PyImportNode

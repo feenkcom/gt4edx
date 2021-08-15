@@ -52,7 +52,7 @@ Gt4EdxLegacyExplainer >> create [
 
 { #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> explainerStyler [
-	^ (GtSmaCCParserStyler forParser: PythonParser2)
+	^ (GtSmaCCParserStyler forParser: PythonParser)
 		stylerRules:
 			{(GtSmaCCNodeStylerRule
 				nodeClassName: #PyImportNode
@@ -125,10 +125,10 @@ Gt4EdxLegacyExplainer >> sourceEditor [
 		aptitude: BrShadowAptitude.
 	look := BrGlamorousCodeEditorAptitude new.
 	sourceElement := BrEditor new.
-	compositeStyler := GtCompositeSmaCCASTStyler forParser: PythonParser2.
+	compositeStyler := GtCompositeSmaCCASTStyler forParser: PythonParser.
 	compositeStyler
 		stylers:
-			{PythonParser2 gtStyler.
+			{PythonParser gtStyler.
 			self explainerStyler}.
 	look styler: compositeStyler.
 	sourceElement

@@ -246,7 +246,7 @@ Gt4EdxImporter >> namespaceNameFor: aNode [
 { #category : 'parsing' }
 Gt4EdxImporter >> parseDirectory: aString [
 	self baseDirectory: aString.
-	^ (PythonParser2 sourceFilesIn: aString)
+	^ (PythonParser sourceFilesIn: aString)
 		collect: [ :each | self parseFile: each ]
 ]
 
@@ -254,7 +254,7 @@ Gt4EdxImporter >> parseDirectory: aString [
 Gt4EdxImporter >> parseFile: aFile [
 	| ast fileRef |
 	fileRef := aFile asFileReference.
-	ast := PythonParser2 parseWithErrors: fileRef contents.
+	ast := PythonParser parseWithErrors: fileRef contents.
 	ast filename: fileRef pathString.
 	^ ast
 ]
