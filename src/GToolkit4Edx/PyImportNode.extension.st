@@ -1,6 +1,6 @@
-Extension { #name : #PyImportNode }
+Extension { #name : 'PyImportNode' }
 
-{ #category : #'*GToolkit4Edx' }
+{ #category : '*GToolkit4Edx' }
 PyImportNode >> gtEdxLegacyExplanationFor: aView [
 	<gtView>
 	| isLegacy isSettings |

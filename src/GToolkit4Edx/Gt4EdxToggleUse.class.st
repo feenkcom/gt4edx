@@ -1,19 +1,19 @@
 Class {
-	#name : #Gt4EdxToggleUse,
-	#superclass : #FAMIXSourcedEntity,
+	#name : 'Gt4EdxToggleUse',
+	#superclass : 'FAMIXSourcedEntity',
 	#instVars : [
 		'definition'
 	],
-	#category : #'GToolkit4Edx-Model'
+	#category : 'GToolkit4Edx-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxToggleUse >> definition [
 	<MSEProperty: #definition type: #Gt4EdxToggleDefinition opposite: #uses>
 	^ definition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxToggleUse >> definition: aDefinition [
 	definition := FMMultivalueLink
 		on: self

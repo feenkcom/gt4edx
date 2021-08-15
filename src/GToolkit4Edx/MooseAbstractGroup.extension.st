@@ -1,6 +1,6 @@
-Extension { #name : #MooseAbstractGroup }
+Extension { #name : 'MooseAbstractGroup' }
 
-{ #category : #'*GToolkit4Edx' }
+{ #category : '*GToolkit4Edx' }
 MooseAbstractGroup >> allEdxToggles [
 	<navigation: 'All Toggles'>
 	^ self allWithType: Gt4EdxToggleDefinition
