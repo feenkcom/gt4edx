@@ -1,6 +1,6 @@
 Class {
-	#name : #Gt4EdxImporter,
-	#superclass : #Object,
+	#name : 'Gt4EdxImporter',
+	#superclass : 'Object',
 	#instVars : [
 		'model',
 		'currentFile',
@@ -10,10 +10,10 @@ Class {
 		'stringSearches',
 		'variableSearches'
 	],
-	#category : #'GToolkit4Edx-Importer'
+	#category : 'GToolkit4Edx-Importer'
 }
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> addSourceFor: aNode to: anEntity [
 	| anchor |
 	anchor := self sourceAnchorFor: aNode.
@@ -29,17 +29,17 @@ Gt4EdxImporter >> addSourceFor: aNode to: anEntity [
 	anEntity sourceAnchor addSourceAnchor: (self sourceAnchorFor: aNode)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxImporter >> baseDirectory [
 	^ model rootFolder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxImporter >> baseDirectory: aFileReference [
 	model rootFolder: aFileReference asFileReference
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> createToggle: aNode named: aString [
 	| name toggle |
 	(aNode parent isKindOf: PyPowerNode)
@@ -63,7 +63,7 @@ Gt4EdxImporter >> createToggle: aNode named: aString [
 	^ true
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> createUse: useNode of: toggle [
 	| use |
 	use := Gt4EdxToggleUse new.
@@ -74,7 +74,7 @@ Gt4EdxImporter >> createUse: useNode of: toggle [
 	self addSourceFor: useNode to: use
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> ensureFileNamed: aFileReference [
 	| filename |
 	filename := aFileReference pathString.
@@ -107,7 +107,7 @@ Gt4EdxImporter >> ensureFileNamed: aFileReference [
 			file ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> ensureFolderNamed: aFileReference [
 	^ folders
 		at: aFileReference pathString
@@ -122,7 +122,7 @@ Gt4EdxImporter >> ensureFolderNamed: aFileReference [
 			folder ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> ensureToggleNamed: aString [
 	^ toggles
 		at: aString
@@ -133,7 +133,7 @@ Gt4EdxImporter >> ensureToggleNamed: aString [
 			toggle ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> firstNodeAfter: anInteger in: aNode [
 	aNode
 		allNodesDo: [ :each | 
@@ -142,13 +142,13 @@ Gt4EdxImporter >> firstNodeAfter: anInteger in: aNode [
 	^ nil
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> importASTs: aCollection [
 	aCollection do: [ :each | self importTogglesIn: each ].
 	aCollection do: [ :each | self importUsesIn: each ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> importCommentToggles: aNode [
 	| source |
 	source := aNode completeSource asString.
@@ -182,7 +182,7 @@ Gt4EdxImporter >> importCommentToggles: aNode [
 									self registerSearchForNode: node to: toggle ] ] ] ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 	| created |
 	created := false.
@@ -195,7 +195,7 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 	^ created
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> importTogglesIn: aNode [
 	currentFile := self ensureFileNamed: aNode filename asFileReference.
 	aNode attributeNamed: #entity put: currentFile.
@@ -204,7 +204,7 @@ Gt4EdxImporter >> importTogglesIn: aNode [
 	self importConstructedToggles: aNode named: nil
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> importUsesIn: aNode [
 	currentFile := self ensureFileNamed: aNode filename asFileReference.
 	aNode
@@ -222,7 +222,7 @@ Gt4EdxImporter >> importUsesIn: aNode [
 						do: [ :toggle | self createUse: each of: toggle ] ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Gt4EdxImporter >> initialize [
 	super initialize.
 	model := MooseModel new.
@@ -233,33 +233,33 @@ Gt4EdxImporter >> initialize [
 	variableSearches := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxImporter >> model [
 	^ model
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> namespaceNameFor: aNode [
 	^ aNode source
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 Gt4EdxImporter >> parseDirectory: aString [
 	self baseDirectory: aString.
-	^ (PythonParser2 sourceFilesIn: aString)
+	^ (PythonParser sourceFilesIn: aString)
 		collect: [ :each | self parseFile: each ]
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 Gt4EdxImporter >> parseFile: aFile [
 	| ast fileRef |
 	fileRef := aFile asFileReference.
-	ast := PythonParser2 parseWithErrors: fileRef contents.
+	ast := PythonParser parseWithErrors: fileRef contents.
 	ast filename: fileRef pathString.
 	^ ast
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 	| node |
 	node := aNode.
@@ -294,14 +294,14 @@ Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 				ifAbsentPut: [ OrderedCollection new ]) add: toggle ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> removeQuotes: aString [
 	^ ('''"' includes: aString first)
 		ifTrue: [ aString copyFrom: 2 to: aString size - 1 ]
 		ifFalse: [ aString ]
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> sourceAnchorFor: aNode [
 	^ FAMIXIndexedFileEntityAnchor
 		file: currentFile
@@ -310,12 +310,12 @@ Gt4EdxImporter >> sourceAnchorFor: aNode [
 		model: model
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> storeAST: aNode into: anEntity [
 	anEntity propertyNamed: #ast put: aNode
 ]
 
-{ #category : #importing }
+{ #category : 'importing' }
 Gt4EdxImporter >> toggleNameFrom: aNode [
 	| args |
 	args := aNode trailers first arguments.

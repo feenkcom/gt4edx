@@ -1,20 +1,20 @@
 Class {
-	#name : #Gt4EdxLegacyExplainer,
-	#superclass : #BrStencil,
+	#name : 'Gt4EdxLegacyExplainer',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'source'
 	],
-	#category : #'GToolkit4Edx-Explainer'
+	#category : 'GToolkit4Edx-Explainer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Gt4EdxLegacyExplainer class >> onSource: aString [
 	^ self new
 		source: aString;
 		yourself
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> create [
 	| mainContainer sourceEditor leftContainer rightContainer rightContainerLabel leftContainerLabel |
 	mainContainer := BrHorizontalPane new
@@ -50,9 +50,9 @@ Gt4EdxLegacyExplainer >> create [
 	^ mainContainer
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> explainerStyler [
-	^ (GtSmaCCParserStyler forParser: PythonParser2)
+	^ (GtSmaCCParserStyler forParser: PythonParser)
 		stylerRules:
 			{(GtSmaCCNodeStylerRule
 				nodeClassName: #PyImportNode
@@ -77,7 +77,7 @@ Gt4EdxLegacyExplainer >> explainerStyler [
 										yourself)} ] ])}
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> explanationText [
 	^ ('Code that uses ' asRopedText ,
 		('LegacyWaffleFlag' asRopedText glamorousExplanationFor: #LegacyWaffleFlag) , 
@@ -92,7 +92,7 @@ Gt4EdxLegacyExplainer >> explanationText [
 		fontSize: 16
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> explanationTextElement [
 	^ (BrEditor new
 		aptitude: (BrGlamorousEditorAptitude new lineSpacing: 5);
@@ -102,17 +102,17 @@ Gt4EdxLegacyExplainer >> explanationTextElement [
 		asScalableElement maxScale: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxLegacyExplainer >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Gt4EdxLegacyExplainer >> source: aString [
 	source := aString
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 Gt4EdxLegacyExplainer >> sourceEditor [
 	| sourceElement sourceContainer compositeStyler look |
 	sourceContainer := BlElement new
@@ -125,10 +125,10 @@ Gt4EdxLegacyExplainer >> sourceEditor [
 		aptitude: BrShadowAptitude.
 	look := BrGlamorousCodeEditorAptitude new.
 	sourceElement := BrEditor new.
-	compositeStyler := GtCompositeSmaCCASTStyler forParser: PythonParser2.
+	compositeStyler := GtCompositeSmaCCASTStyler forParser: PythonParser.
 	compositeStyler
 		stylers:
-			{PythonParser2 gtStyler.
+			{PythonParser gtStyler.
 			self explainerStyler}.
 	look styler: compositeStyler.
 	sourceElement
