@@ -9,6 +9,22 @@ Class {
 	#category : 'GToolkit4Edx-Model'
 }
 
+{ #category : 'accessing' }
+Gt4EdxToggleDefinition >> annotatedToggleName [
+	^ self comments 
+		detect: [:each | each content beginsWith: '# .. toggle_name:']
+		ifFound: [:each | (each content gtRemovePrefix: '# .. toggle_name:') trimBoth]
+		ifNone: [^ 'N/A']
+]
+
+{ #category : 'accessing' }
+Gt4EdxToggleDefinition >> hasAnnotatedToggleName [
+	^ self comments 
+		detect: [:each | each content beginsWith: '# .. toggle_name:']
+		ifFound: [:each | true ]
+		ifNone: [ false ]
+]
+
 { #category : 'testing' }
 Gt4EdxToggleDefinition >> hasToggleComment [
 	^ self comments anySatisfy: [ :each | (each content indexOfSubCollection: 'toggle_name') > 0 ]
