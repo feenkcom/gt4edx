@@ -3,16 +3,33 @@ Class {
 	#superclass : 'FAMIXNamedEntity',
 	#instVars : [
 		'uses',
-		'type'
+		'type',
+		'invalidName'
 	],
 	#category : 'GToolkit4Edx-Model'
 }
+
+{ #category : 'testing' }
+Gt4EdxToggleDefinition >> hasToggleComment [
+	^ self comments anySatisfy: [ :each | (each content indexOfSubCollection: 'toggle_name') > 0 ]
+]
 
 { #category : 'accessing' }
 Gt4EdxToggleDefinition >> initialize [
 	super initialize.
 	type := #DjangoSetting.
-	uses := FMMultivalueLink on: self opposite: #definition:
+	uses := FMMultivalueLink on: self opposite: #definition:.
+	invalidName := false
+]
+
+{ #category : 'accessing' }
+Gt4EdxToggleDefinition >> invalidName [
+	^ invalidName
+]
+
+{ #category : 'accessing' }
+Gt4EdxToggleDefinition >> invalidName: aBoolean [
+	invalidName := aBoolean
 ]
 
 { #category : 'testing' }

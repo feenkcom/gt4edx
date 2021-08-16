@@ -153,32 +153,35 @@ Gt4EdxImporter >> importCommentToggles: aNode [
 	| source |
 	source := aNode completeSource asString.
 	aNode comments
-		keysAndValuesDo: [ :i :each | 
+		keysAndValuesDo:
+			[ :i :each | 
 			| comment index name toggle |
 			comment := source copyFrom: each first to: each last.
 			index := comment indexOfSubCollection: 'toggle_name: '.
 			index > 0
-				ifTrue: [ name := (comment allButFirst: index + 12) trim.
+				ifTrue:
+					[ name := (comment allButFirst: index + 12) trim.
 					toggle := self ensureToggleNamed: name.
 					(self firstNodeAfter: each last in: aNode)
-						ifNotNil: [ :node | 
+						ifNotNil:
+							[ :node | 
 							| j famixComment |
 							j := i.
-							[ j <= aNode comments size
-								and: [ (aNode comments at: j) first < node startPosition ] ]
-								whileTrue: [ j := j + 1 ].
-							i to: (j min: aNode comments size) do: [ :k | 
-								famixComment := FAMIXComment new.
-								famixComment
-									content:
-										(source
-											copyFrom: (aNode comments at: k) first
-											to: (aNode comments at: k) last).
-								model add: famixComment.
-								currentFile addEntity: famixComment.
-								toggle addComment: famixComment ].
+							[ j <= aNode comments size and: [ (aNode comments at: j) first < node startPosition ] ] whileTrue: [ j := j + 1 ].
+							i
+								to: (j min: aNode comments size)
+								do:
+									[ :k | 
+									famixComment := FAMIXComment new.
+									famixComment content: (source copyFrom: (aNode comments at: k) first to: (aNode comments at: k) last).
+									model add: famixComment.
+									currentFile addEntity: famixComment.
+									toggle addComment: famixComment ].
 							(self importConstructedToggles: node named: name)
-								ifFalse: [ self addSourceFor: node to: toggle.
+								ifFalse:
+									[ self addSourceFor: node to: toggle.
+									self storeAST: node into: toggle.
+									node attributeNamed: #toggle put: toggle.
 									self registerSearchForNode: node to: toggle ] ] ] ]
 ]
 
@@ -196,12 +199,53 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 ]
 
 { #category : 'importing' }
+Gt4EdxImporter >> importFeatureToggles: aNode [
+	aNode
+		allNodesOfType: PyExprStmtNode
+		do: [ :each | each testlist source = 'FEATURES' ifTrue: [ self importTogglesInFeatures: each ] ]
+]
+
+{ #category : 'importing' }
 Gt4EdxImporter >> importTogglesIn: aNode [
 	currentFile := self ensureFileNamed: aNode filename asFileReference.
 	aNode attributeNamed: #entity put: currentFile.
 	self storeAST: aNode into: currentFile.
 	self importCommentToggles: aNode.
+	self importFeatureToggles: aNode.
 	self importConstructedToggles: aNode named: nil
+]
+
+{ #category : 'importing' }
+Gt4EdxImporter >> importTogglesInFeatures: aNode [
+	aNode
+		allNodesDo:
+			[ :each | 
+			((each isKindOf: PyMoreTestsNode) or: [ each isKindOf: PyDictorsetmakerNode ])
+				ifTrue:
+					[ ((each attributeNamed: #toggle) ifNil: [ each test attributeNamed: #toggle ])
+						ifNil:
+							[ | toggle source |
+							toggle := self ensureToggleNamed: 'FEATURES[''' , (self removeQuotes: each test source) , ''']'.
+							source := aNode topParent completeSource asString.
+							each test commentsBefore
+								do:
+									[ :comment | 
+									| famixComment |
+									famixComment := FAMIXComment new.
+									famixComment content: (source copyFrom: comment first to: comment last).
+									model add: famixComment.
+									currentFile addEntity: famixComment.
+									toggle addComment: famixComment ].
+							self addSourceFor: each test to: toggle.
+							self storeAST: each test into: toggle.
+							each test attributeNamed: #toggle put: toggle.
+							self registerSearchForNode: each test to: toggle ]
+						ifNotNil:
+							[ :toggle | 
+							| name |
+							name := self removeQuotes: each test source.
+							(name = toggle name or: [ (toggle name indexOfSubCollection: '''' , name , '''') > 0 ])
+								ifFalse: [ toggle invalidName: true ] ] ] ]
 ]
 
 { #category : 'importing' }
