@@ -99,12 +99,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-15T11:19:48.943933+02:00"
+			"dateAndTimeString" : "2021-08-22T16:26:33.408776+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "gt4edx"
+		"title" : "Glamorous Toolkit 4 openEdx"
 	},
 	"uid" : {
 		"__type" : "uuid",
