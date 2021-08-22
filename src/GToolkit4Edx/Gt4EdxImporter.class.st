@@ -145,7 +145,8 @@ Gt4EdxImporter >> firstNodeAfter: anInteger in: aNode [
 { #category : 'importing' }
 Gt4EdxImporter >> importASTs: aCollection [
 	aCollection do: [ :each | self importTogglesIn: each ].
-	aCollection do: [ :each | self importUsesIn: each ]
+	aCollection do: [ :each | self importUsesIn: each ].
+	model sourceLanguage: FAMIXPythonSourceLanguage new
 ]
 
 { #category : 'importing' }
