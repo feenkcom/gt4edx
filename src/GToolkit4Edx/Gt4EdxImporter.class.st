@@ -159,9 +159,12 @@ Gt4EdxImporter >> importCommentToggles: aNode [
 			| comment index name toggle |
 			comment := source copyFrom: each first to: each last.
 			index := comment indexOfSubCollection: 'toggle_name: '.
+			index = 0 ifTrue: [ index := index := comment indexOfSubCollection: 'setting_name: ' ].
 			index > 0
 				ifTrue:
-					[ name := (comment allButFirst: index + 12) trim.
+					[ name := (comment allButFirst: (comment indexOf: $  startingAt: index)) trim.
+					index := name indexOf: $ .
+					index > 0 ifTrue: [ name := name first: index - 1 ].
 					toggle := self ensureToggleNamed: name.
 					(self firstNodeAfter: each last in: aNode)
 						ifNotNil:
@@ -200,6 +203,42 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 ]
 
 { #category : 'importing' }
+Gt4EdxImporter >> importDocumentCommentToggles: aNode [
+	aNode
+		allNodesOfType: PyStringNode
+		do:
+			[ :each | 
+			(each value source beginsWith: '"""')
+				ifTrue:
+					[ | comment index name toggle |
+					comment := each value source.
+					index := comment indexOfSubCollection: 'toggle_name: '.
+					index = 0 ifTrue: [ index := index := comment indexOfSubCollection: 'setting_name: ' ].
+					index > 0
+						ifTrue:
+							[ name := comment allButFirst: (comment indexOf: $  startingAt: index).
+							name := (name first: (name indexOf: Character lf ifAbsent: [ name size - 3 ])) trim.
+							index := name indexOf: $ .
+							index > 0 ifTrue: [ name := name first: index - 1 ].
+							toggle := self ensureToggleNamed: name.
+							(self firstNodeAfter: each stopPosition in: aNode)
+								ifNotNil:
+									[ :node | 
+									| famixComment |
+									famixComment := FAMIXComment new.
+									famixComment content: each value source.
+									model add: famixComment.
+									currentFile addEntity: famixComment.
+									toggle addComment: famixComment.
+									(self importConstructedToggles: node named: name)
+										ifFalse:
+											[ self addSourceFor: node to: toggle.
+											self storeAST: node into: toggle.
+											node attributeNamed: #toggle put: toggle.
+											self registerSearchForNode: node to: toggle ] ] ] ] ]
+]
+
+{ #category : 'importing' }
 Gt4EdxImporter >> importFeatureToggles: aNode [
 	aNode
 		allNodesOfType: PyExprStmtNode
@@ -212,6 +251,7 @@ Gt4EdxImporter >> importTogglesIn: aNode [
 	aNode attributeNamed: #entity put: currentFile.
 	self storeAST: aNode into: currentFile.
 	self importCommentToggles: aNode.
+	self importDocumentCommentToggles: aNode.
 	self importFeatureToggles: aNode.
 	self importConstructedToggles: aNode named: nil
 ]
