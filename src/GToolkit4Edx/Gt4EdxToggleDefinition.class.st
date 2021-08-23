@@ -12,8 +12,12 @@ Class {
 { #category : 'accessing' }
 Gt4EdxToggleDefinition >> annotatedToggleName [
 	^ self comments 
-		detect: [:each | each content beginsWith: '# .. toggle_name:']
-		ifFound: [:each | (each content gtRemovePrefix: '# .. toggle_name:') trimBoth]
+		detect: [:each | 
+			(each content beginsWith: '# .. toggle_name:') or: [
+				(each content beginsWith: '# .. setting_name:') ]]
+		ifFound: [:each | 
+			((each content gtRemovePrefix: '# .. toggle_name:')
+				 gtRemovePrefix: '# .. setting_name:') trimBoth]
 		ifNone: [^ 'N/A']
 ]
 
