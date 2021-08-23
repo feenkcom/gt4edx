@@ -33,10 +33,10 @@ Gt4EdxToggleDefinition >> gtUsesFor: aView [
 { #category : 'accessing' }
 Gt4EdxToggleDefinition >> hasAnnotatedToggleName [
 	^ self comments 
-		detect: [:each | 
-			(each content beginsWith: '# .. toggle_name:') or: [
-				(each content beginsWith: '# .. setting_name:') ]]
-		ifFound: [:each | true ]
+		detect: [ :each | 
+			(each content includesSubstring: 'toggle_name:') or: [
+					each content includesSubstring: 'setting_name:' ] ]
+		ifFound: [ :each | true ]
 		ifNone: [ false ]
 ]
 
