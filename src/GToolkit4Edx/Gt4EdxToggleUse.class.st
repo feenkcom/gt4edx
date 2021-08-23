@@ -21,3 +21,8 @@ Gt4EdxToggleUse >> definition: aDefinition [
 		from: self definition
 		to: aDefinition
 ]
+
+{ #category : 'accessing' }
+Gt4EdxToggleUse >> gtDisplayOn: aStream [
+	aStream nextPutAll: (', ' join: (self containerFiles collect: #mooseName))
+]

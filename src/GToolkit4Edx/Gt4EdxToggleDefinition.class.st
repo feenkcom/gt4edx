@@ -18,6 +18,15 @@ Gt4EdxToggleDefinition >> annotatedToggleName [
 ]
 
 { #category : 'accessing' }
+Gt4EdxToggleDefinition >> gtUsesFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Uses';
+		items: [self uses];
+		column: 'Files' text: #gtDisplayString
+]
+
+{ #category : 'accessing' }
 Gt4EdxToggleDefinition >> hasAnnotatedToggleName [
 	^ self comments 
 		detect: [:each | each content beginsWith: '# .. toggle_name:']
