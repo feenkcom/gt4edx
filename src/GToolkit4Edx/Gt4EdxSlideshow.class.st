@@ -152,7 +152,7 @@ Gt4EdxSlideshow >> sourceEditorFor: aFileReference styler: explainationStyler [
 		margin: (BlInsets all: 10);
 		background: Color white;
 		aptitude: BrShadowAptitude.
-	look := BrGlamorousCodeEditorAptitude new.
+	look := BrGlamorousCodeEditorAptitude new fontSize: 12.
 	sourceElement := BrEditor new.
 	explainationStyler isNil
 		ifTrue: [ styler := PythonParser gtStyler ]
@@ -225,7 +225,7 @@ Gt4EdxSlideshow >> switchSlideFor: aSlide [
 	^ aSlide textAndElement
 		priority: 1;
 		newTextWithFormat: self switchText;
-		elementWeight: 0.6;
+		elementWeight: 0.75;
 		element: [ self switchElement ].
 ]
 
