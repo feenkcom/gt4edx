@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:20:00.646263+02:00"
+						"dateAndTimeString" : "2021-08-22T20:52:54.271037+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:20:20.887682+02:00"
+						"dateAndTimeString" : "2021-08-22T20:52:54.271037+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "LlWSUveFDQCPPf5NBjwxkw=="
+					"uidString" : "06opJYyGDQCrPCYzDXUnxQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[About the gt4edx knowledge base]]"
+				"string" : "Let's start with something light: visualizing the structure of the files."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:07.975747+02:00"
+						"dateAndTimeString" : "2021-08-22T20:52:33.508088+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,20 +66,20 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:11.37843+02:00"
+						"dateAndTimeString" : "2021-08-22T20:53:18.31061+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "ezO6VPeFDQCPQCqYBjwxkw=="
+					"uidString" : "8gmZIIyGDQCrNoeMDXUnxQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Where are the edx-platform sources?]]"
+				"string" : "Inspect the result of the following snippet to see a treemap visualization:"
 			},
 			{
-				"__type" : "textSnippet",
+				"__type" : "pharoSnippet",
 				"children" : {
 					"__type" : "snippets",
 					"items" : [ ]
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:19.613784+02:00"
+						"dateAndTimeString" : "2021-08-22T20:51:55.691103+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,54 +103,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:21.405697+02:00"
+						"dateAndTimeString" : "2021-08-22T20:52:04.935916+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "jHiAt6qGDQC4sXCzDXUnxQ=="
+					"uidString" : "htSrIYyGDQCrODbbDXUnxQ=="
 				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "[[Visualize the Organization of Python Files]]"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:24.315205+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:25.877413+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "tKHKt6qGDQC4s2NDDXUnxQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "[[How Are Toggles Defined and Used?]]"
+				"code" : "GtNestedRectangleTreeMap new\r\ttree: Gt4EdxGlobals rootDirectory;\r\tdeep: #directories;\r\tleaves: [ :anItem | anItem files select: [:each | each extension = 'py']];\r\tcontainerElement: [ :anElement :aNodeContext | \r\t\t| label scaledLabel |\r\t\taNodeContext level = 2 ifTrue: [\r\t\t\tlabel := BlTextElement new \r\t\t\t\ttext: (aNodeContext model basename asRopedText\r\t\t\t\t\t\t\tforeground: (Color black alpha: 0.8)).\r\t\t\tscaledLabel := label asScalableElement \r\t\t\t\tzIndex: 10; \r\t\t\t\tconstraintsDo: [:c | \r\t\t\t\t\tc horizontal matchParent. \r\t\t\t\t\tc vertical matchParent. \r\t\t\t\t\tc ignoreByLayout.\r\t\t\t\t\tc ignored horizontal weight: 0.2.\r\t\t\t\t\tc ignored horizontal alignCenter].\r\t\t\tanElement addChild: scaledLabel].\r\t\tanElement border: (BlBorder \r\t\t\tpaint: (Color black alpha: 0.5 / aNodeContext level) \r\t\t\twidth: 2).\r\t\tanElement padding: (BlInsets all: 2) ];\r\tleafElement: [ :anElement :aLeafContext | anElement background: Color white ] "
 			}
 		]
 	},
@@ -162,7 +122,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-15T11:19:45.976513+02:00"
+			"dateAndTimeString" : "2021-08-22T20:51:37.643928+02:00"
 		}
 	},
 	"editEmail" : {
@@ -173,15 +133,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-22T16:26:33.408776+02:00"
+			"dateAndTimeString" : "2021-08-22T20:55:12.185873+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Glamorous Toolkit 4 openEdx"
+		"title" : "Visualize the Organization of Python Files"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "59539252-f785-0d00-8f3c-8d3a063c3193"
+		"uuid" : "40739820-8c86-0d00-ab35-da850d7527c5"
 	}
 }

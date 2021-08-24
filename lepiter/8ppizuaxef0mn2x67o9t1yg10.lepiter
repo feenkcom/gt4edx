@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:25:43.081561+02:00"
+						"dateAndTimeString" : "2021-08-23T00:08:05.905134+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "When we reason about a system, we most often build a model of what we are interested in. "
+				"string" : "When we reason about a system, we often build a model of what we are interested in. In this case, we want to reason about how toggles are defined and where they are being used."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:08:19.203263+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:13:56.976405+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "6jtc346GDQCro+L+DXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The {{gtClass:Gt4EdxImporter}} is the responsible for creating the model."
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -66,14 +103,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:21:49.661593+02:00"
+						"dateAndTimeString" : "2021-08-22T21:59:18.014175+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "TXVTWfeFDQCPSy/WBjwxkw=="
 				},
-				"code" : "root := '/Users/girba/Work/Code/casestudies/edx-platform'."
+				"code" : "root := Gt4EdxGlobals rootDirectory."
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -100,7 +137,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:22:08.718929+02:00"
+						"dateAndTimeString" : "2021-08-22T20:08:25.124424+02:00"
 					}
 				},
 				"uid" : {
@@ -108,6 +145,329 @@
 					"uidString" : "mW8XWfeFDQCPSHsEBjwxkw=="
 				},
 				"code" : "importer := Gt4EdxImporter new.\nasts := importer parseDirectory: root.\nmodel := importer\n\timportASTs: asts;\n\tmodel"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:14:03.433258+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:15:23.145101+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Pv8v3Y6GDQCrodsaDXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Inspecting the above code leads to a model object that holds all detected toggle definitions in the system. These entities contain a few properties and connections that we can use to answer questions. So, let's formulate some:"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-08-23T00:07:27.513392+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-08-23T21:18:32.743629+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Yjvx3I6GDQCrn6mjDXUnxQ=="
+							},
+							"code" : "model allEdxToggles select: [:each | each hasAnnotatedToggleName not ]"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:15:26.079761+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T00:15:34.059577+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Bmpp+Y6GDQCrrdGhDXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "What are the undocumented toggles?"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-08-23T14:39:22.977365+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-08-23T21:53:02.050593+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "gdwvC5uGDQCr/e8mDXUnxQ=="
+							},
+							"code" : "model allEdxToggles select: [:each | each invalidName ]"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T14:39:34.555169+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T14:39:43.508702+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "XQtjC5uGDQCr/wEMDXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Are there any wrongly documented features?"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-24T09:20:23.019758+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-24T09:20:37.600841+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "VBils6qGDQC4r6MzDXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "What toggles are defined in a component and used in another?"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T14:41:52.158901+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T14:42:51.96525+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "4zAUFJuGDQCsATXvDXUnxQ=="
+				},
+				"code" : "(model allEdxToggles reject: [:each | \r\teach containerFiles size > 1]) select: [:each | \r\t\teach uses anySatisfy: [:use | \r\t\t\tuse containerFiles anyOne edxTopComponent ~= each containerFiles anyOne edxTopComponent ] ]"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-24T09:19:14.836758+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-24T09:19:35.613143+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "2lf5naCGDQCw6aWgDXUnxQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "What are the hidden dependencies between top components introduced by toggles?"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T23:23:48.591316+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-23T23:28:53.493476+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "BgevXqKGDQCxLquIDXUnxQ=="
+				},
+				"code" : "dependencies := Dictionary new.\r(model allEdxToggles reject: [:each | \r\teach containerFiles size > 1]) do: [:toggle | \r\ttoggle uses do: [:use |\r\t\tassoc := (use containerFiles anyOne edxTopComponent -> toggle containerFiles anyOne edxTopComponent).\r\t\tdependencies \r\t\t\tat: assoc ifAbsentPut: [OrderedCollection new].\r\t\t(dependencies at: assoc) add: use ] ].\rm := GtMondrian new.\rm nodes \r\tstencil: [ :each | BrLabel new text: each name; aptitude: BrGlamorousLabelAptitude];\r\twith: ((dependencies keys collect: #key), (dependencies keys collect: #value)) asSet.\rm edges \r\tstencil: [:assoc | \r\t\tBlParabollaArcElement new \r\t\t\twhen: BlClickEvent do: [:e | e target phlow spawnObject: assoc value asMooseGroup. e consumed: true ];\r\t\t\tcurvatureFraction: 0.3;\r\t\t\tborder: (BlBorder paint: Color orange width: assoc value size / 40);\r\t\t\ttoHead: (BlArrowheadSimpleArrow new\r\t\t\t\t\tbackground: Color orange)];\r\tconnect: (dependencies associations reject: [:assoc | assoc key key = assoc key value ]) \r\tfrom: [ :assoc | assoc key key ] \r\tto: [ :assoc | assoc key value].\rm layout circle radius: 100.\rm "
 			}
 		]
 	},
@@ -130,12 +490,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-15T11:21:05.341578+02:00"
+			"dateAndTimeString" : "2021-08-22T20:55:41.36074+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Build a model for toggles"
+		"title" : "How Are Toggles Defined and Used?"
 	},
 	"uid" : {
 		"__type" : "uuid",
