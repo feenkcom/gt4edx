@@ -1,5 +1,5 @@
-# Glamorous Toolkit for openEdx
-A repository dedicated to analyses of [openEdx](https://github.com/edx) that reproduce the contents presented in [our blog post about steering agile architecture by example](https://lepiter.io/feenk/steering-agile-architecture-by-example--th-e2p6aps2brbby94deek31xqxh/).
+# Glamorous Toolkit for Open edX
+A repository dedicated to analyses of [Open edX](https://github.com/edx) that reproduce the contents presented in [our blog post about steering agile architecture by example](https://lepiter.io/feenk/steering-agile-architecture-by-example--th-e2p6aps2brbby94deek31xqxh/).
 
 ## Install
 
