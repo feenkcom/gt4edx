@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:18:21.044112+02:00"
+						"dateAndTimeString" : "2021-09-11T13:11:49.684624+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "This is a demonstration knowledge base created by [feenk](https://feenk.com) for [openEdx](https://github.com/edx)."
+				"string" : "This is a demonstration knowledge base created by [feenk](https://feenk.com) for [Open edX](https://github.com/edx)."
 			},
 			{
 				"__type" : "textSnippet",
@@ -116,7 +116,82 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-09-11T13:10:41.63676+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-09-11T13:11:33.72169+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "YmX3BBiIDQCl9tFuBL8jBQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "First, please tell us [[Where are the edx-platform sources?]]."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-08-15T11:12:39.320102+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2021-09-11T13:11:38.290103+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "DJetOPeFDQCPMaHCBjwxkw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Then, please follow the table of contents on the left."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -126,7 +201,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:12:39.320102+02:00"
+						"dateAndTimeString" : "2021-09-11T13:10:39.961199+02:00"
 					}
 				},
 				"editEmail" : {
@@ -137,17 +212,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:17:16.197163+02:00"
+						"dateAndTimeString" : "2021-09-11T13:10:39.961199+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "DJetOPeFDQCPMaHCBjwxkw=="
+					"uidString" : "5yjlBBiIDQCl9FIKBL8jBQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Great. Now, let's dive further. Please follow the table of contents on the left."
+				"string" : "Great. Now, let's dive further. "
 			}
 		]
 	},
