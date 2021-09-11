@@ -173,12 +173,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-22T16:26:33.408776+02:00"
+			"dateAndTimeString" : "2021-09-11T13:08:30.186707+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Glamorous Toolkit 4 openEdx"
+		"title" : "Glamorous Toolkit 4 Open edX"
 	},
 	"uid" : {
 		"__type" : "uuid",
