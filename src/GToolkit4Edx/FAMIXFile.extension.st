@@ -1,6 +1,6 @@
-Extension { #name : 'FAMIXFile' }
+Extension { #name : #FAMIXFile }
 
-{ #category : '*GToolkit4Edx' }
+{ #category : #'*GToolkit4Edx' }
 FAMIXFile >> edxTopComponent [
 	self parentFolder isNil ifTrue: [ ^ nil ].
 	^ self parentFolder edxTopComponent

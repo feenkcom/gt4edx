@@ -1,6 +1,6 @@
-Extension { #name : 'FAMIXFolder' }
+Extension { #name : #FAMIXFolder }
 
-{ #category : '*GToolkit4Edx' }
+{ #category : #'*GToolkit4Edx' }
 FAMIXFolder >> edxTopComponent [
 
 	self isRoot ifTrue: [ ^ nil ].
@@ -9,7 +9,7 @@ FAMIXFolder >> edxTopComponent [
 	^ self parentFolder edxTopComponent
 ]
 
-{ #category : '*GToolkit4Edx' }
+{ #category : #'*GToolkit4Edx' }
 FAMIXFolder >> isEdxTopComponent [
 	self parentFolder isNil ifTrue: [ ^ false ].
 	^ self parentFolder isRoot

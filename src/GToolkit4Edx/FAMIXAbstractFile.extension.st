@@ -1,6 +1,6 @@
-Extension { #name : 'FAMIXAbstractFile' }
+Extension { #name : #FAMIXAbstractFile }
 
-{ #category : '*GToolkit4Edx' }
+{ #category : #'*GToolkit4Edx' }
 FAMIXAbstractFile >> edxTopComponent [
 	^ self subclassResponsibility
 ]

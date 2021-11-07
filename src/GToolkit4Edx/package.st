@@ -1,1 +1,1 @@
-Package { #name : 'GToolkit4Edx' }
+Package { #name : #GToolkit4Edx }

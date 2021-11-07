@@ -1,18 +1,30 @@
 Class {
-	#name : 'Gt4EdxGlobals',
-	#superclass : 'Object',
+	#name : #Gt4EdxGlobals,
+	#superclass : #Object,
 	#classInstVars : [
-		'rootDirectory'
+		'rootDirectory',
+		'model'
 	],
-	#category : 'GToolkit4Edx-Model'
+	#category : #'GToolkit4Edx-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxGlobals class >> rootDirectory [
 	^ rootDirectory
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxGlobals class >> rootDirectory: aString [ 
 	rootDirectory := aString asFileReference
+]
+
+{ #category : #accessing }
+Gt4EdxGlobals class >> toggleModel [
+	^ model ifNil: [ 
+		  | importer asts |
+		  importer := Gt4EdxImporter new.
+		  asts := importer parseDirectory: self rootDirectory.
+		  model := importer
+			           importASTs: asts;
+			           model ]
 ]

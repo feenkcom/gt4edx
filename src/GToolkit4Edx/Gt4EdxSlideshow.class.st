@@ -1,13 +1,13 @@
 Class {
-	#name : 'Gt4EdxSlideshow',
-	#superclass : 'Object',
+	#name : #Gt4EdxSlideshow,
+	#superclass : #Object,
 	#instVars : [
 		'fileSystem'
 	],
 	#category : 'GToolkit4Edx-Slides'
 }
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> currentFileReference [
 	| ref |
 	ref := fileSystem / 'New'.
@@ -59,18 +59,18 @@ def should_redirect_to_account_microfrontend():
 	^ ref
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> currentNames [
 	^ #('SettingToggle' 'SettingDictToggle' 'WaffleFlag' 'WaffleSwitch')
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 Gt4EdxSlideshow >> initialize [
 	super initialize.
 	fileSystem := FileSystem memory workingDirectory
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> legacyFileReference [
 	| ref |
 	ref := fileSystem / 'Old'.
@@ -123,12 +123,12 @@ def should_redirect_to_account_microfrontend():
 	^ ref
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> legacyNames [
 	^ #('LegacyWaffleFlag' 'LegacyWaffleSwitch')
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 Gt4EdxSlideshow >> sourceEditorFor: aFileReference styler: explainationStyler [
 	| container sourceElement sourceContainer styler look label |
 	container := BlElement new
@@ -171,7 +171,7 @@ Gt4EdxSlideshow >> sourceEditorFor: aFileReference styler: explainationStyler [
 	^ container
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> style: aToken in: text [
 	| isLegacy isCurrent |
 	isLegacy := self legacyNames includes: aToken source.
@@ -196,7 +196,7 @@ Gt4EdxSlideshow >> style: aToken in: text [
 	^ isLegacy or: [ isCurrent ]
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> switchElement [
 	| element |
 	element := BlElement new
@@ -219,7 +219,7 @@ Gt4EdxSlideshow >> switchElement [
 	^ element
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> switchSlideFor: aSlide [
 	<gtSlide>
 	^ aSlide textAndElement
@@ -229,7 +229,7 @@ Gt4EdxSlideshow >> switchSlideFor: aSlide [
 		element: [ self switchElement ].
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> switchStyler [
 	^ (GtSmaCCParserStyler forParser: PythonParser)
 		stylerRules:
@@ -248,7 +248,7 @@ Gt4EdxSlideshow >> switchStyler [
 										yourself)} ] ])}
 ]
 
-{ #category : 'switch' }
+{ #category : #switch }
 Gt4EdxSlideshow >> switchText [
 	^ ('The ' asRopedText ,
 		('LegacyWaffleFlag' asRopedText glamorousExplanationFor: #LegacyWaffleFlag) , 

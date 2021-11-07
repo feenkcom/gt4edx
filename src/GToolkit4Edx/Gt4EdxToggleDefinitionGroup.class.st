@@ -1,10 +1,10 @@
 Class {
-	#name : 'Gt4EdxToggleDefinitionGroup',
-	#superclass : 'MooseGroup',
+	#name : #Gt4EdxToggleDefinitionGroup,
+	#superclass : #MooseGroup,
 	#category : 'GToolkit4Edx-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinitionGroup >> annotation [
 	
 	<package: #FAMIX>

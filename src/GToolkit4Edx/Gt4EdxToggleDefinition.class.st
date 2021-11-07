@@ -1,6 +1,6 @@
 Class {
-	#name : 'Gt4EdxToggleDefinition',
-	#superclass : 'FAMIXNamedEntity',
+	#name : #Gt4EdxToggleDefinition,
+	#superclass : #FAMIXNamedEntity,
 	#instVars : [
 		'uses',
 		'type',
@@ -9,7 +9,7 @@ Class {
 	#category : 'GToolkit4Edx-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> annotatedToggleName [
 	^ self comments 
 		detect: [:each | 
@@ -21,7 +21,7 @@ Gt4EdxToggleDefinition >> annotatedToggleName [
 		ifNone: [^ 'N/A']
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> gtUsesFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -30,7 +30,7 @@ Gt4EdxToggleDefinition >> gtUsesFor: aView [
 		column: 'Files' text: #gtDisplayString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> hasAnnotatedToggleName [
 	^ self comments 
 		detect: [ :each | 
@@ -40,12 +40,12 @@ Gt4EdxToggleDefinition >> hasAnnotatedToggleName [
 		ifNone: [ false ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 Gt4EdxToggleDefinition >> hasToggleComment [
 	^ self comments anySatisfy: [ :each | (each content indexOfSubCollection: 'toggle_name') > 0 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> initialize [
 	super initialize.
 	type := #DjangoSetting.
@@ -53,39 +53,39 @@ Gt4EdxToggleDefinition >> initialize [
 	invalidName := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> invalidName [
 	^ invalidName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> invalidName: aBoolean [
 	invalidName := aBoolean
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 Gt4EdxToggleDefinition >> isLegacy [
 	^ type beginsWith: 'Legacy'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> type [
 	^ type
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> type: aSymbol [
 	type := aSymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> uses [
 	<MSEProperty: #uses type: #Gt4EdxToggleUse opposite: #definition>
 	<multivalued>
 	^ uses
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 Gt4EdxToggleDefinition >> uses: aCollection [
 	self uses value: aCollection
 ]
