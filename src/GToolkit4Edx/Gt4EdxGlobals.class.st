@@ -76,7 +76,9 @@ Gt4EdxGlobals class >> treemapOfComponents [
 		aNodeContext level = 2 ifTrue: [
 			label := BlTextElement new 
 				text: (aNodeContext model basename asRopedText
-							foreground: (Color black alpha: 0.8)).
+							glamorousRegularFont;
+							bold;
+							foreground: (Color black alpha: 0.6)).
 			scaledLabel := label asScalableElement 
 				zIndex: 10; 
 				constraintsDo: [:c | 
@@ -106,7 +108,9 @@ Gt4EdxGlobals class >> treemapOfComponentsWithSelectedToggleUsers [
 		aNodeContext level = 2 ifTrue: [
 			label := BlTextElement new 
 				text: (aNodeContext model basename asRopedText
-							foreground: (Color black alpha: 0.8)).
+							glamorousRegularFont;
+							bold;
+							foreground: (Color black alpha: 0.6)).
 			scaledLabel := label asScalableElement 
 				zIndex: 10; 
 				constraintsDo: [:c | 
