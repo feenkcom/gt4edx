@@ -64,3 +64,65 @@ Gt4EdxGlobals class >> toggleModel [
 			           importASTs: asts;
 			           model ]
 ]
+
+{ #category : #accessing }
+Gt4EdxGlobals class >> treemapOfComponents [
+	^ GtNestedRectangleTreeMap new
+	tree: Gt4EdxGlobals rootDirectory;
+	deep: #directories;
+	leaves: [ :anItem | anItem files select: [:each | each extension = 'py']];
+	containerElement: [ :anElement :aNodeContext | 
+		| label scaledLabel |
+		aNodeContext level = 2 ifTrue: [
+			label := BlTextElement new 
+				text: (aNodeContext model basename asRopedText
+							foreground: (Color black alpha: 0.8)).
+			scaledLabel := label asScalableElement 
+				zIndex: 10; 
+				constraintsDo: [:c | 
+					c horizontal matchParent. 
+					c vertical matchParent. 
+					c ignoreByLayout.
+					c ignored horizontal weight: 0.2.
+					c ignored horizontal alignCenter].
+			anElement addChild: scaledLabel].
+		anElement border: (BlBorder 
+			paint: (Color black alpha: 0.5 / aNodeContext level) 
+			width: 2).
+		anElement padding: (BlInsets all: 2) ];
+	leafElement: [ :anElement :aLeafContext | anElement background: Color white ] 
+]
+
+{ #category : #accessing }
+Gt4EdxGlobals class >> treemapOfComponentsWithSelectedToggleUsers [
+	| toggleUsers |
+	toggleUsers := Gt4EdxGlobals toggleModel allEdxToggles flatCollectAsSet: [:toggle | toggle uses collect: [:u | u sourceAnchor fileReference ]].
+	^ GtNestedRectangleTreeMap new
+	tree: Gt4EdxGlobals rootDirectory;
+	deep: #directories;
+	leaves: [ :anItem | anItem files select: [:each | each extension = 'py']];
+	containerElement: [ :anElement :aNodeContext | 
+		| label scaledLabel |
+		aNodeContext level = 2 ifTrue: [
+			label := BlTextElement new 
+				text: (aNodeContext model basename asRopedText
+							foreground: (Color black alpha: 0.8)).
+			scaledLabel := label asScalableElement 
+				zIndex: 10; 
+				constraintsDo: [:c | 
+					c horizontal matchParent. 
+					c vertical matchParent. 
+					c ignoreByLayout.
+					c ignored horizontal weight: 0.2.
+					c ignored horizontal alignCenter].
+			anElement addChild: scaledLabel].
+		anElement border: (BlBorder 
+			paint: (Color black alpha: 0.5 / aNodeContext level) 
+			width: 2).
+		anElement padding: (BlInsets all: 2) ];
+	leafElement: [ :anElement :aLeafContext | 
+		(toggleUsers includes: aLeafContext model) 
+			ifTrue: [ anElement background: Color red ] 
+			ifFalse: [
+				anElement background: Color white ] ]
+]
