@@ -76,7 +76,7 @@
 				"code" : "GtLiveShow create: Gt4EdxSlideshow new ",
 				"elementHeight" : 485,
 				"codeHeight" : 50,
-				"codeVisible" : false
+				"codeVisible" : true
 			}
 		]
 	},
