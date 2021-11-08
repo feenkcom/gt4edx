@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-23T00:13:56.976405+02:00"
+						"dateAndTimeString" : "2021-11-08T00:49:20.475318+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The {{gtClass:Gt4EdxImporter}} is the responsible for creating the model."
+				"string" : "The {{gtClass:Gt4EdxImporter}} is the responsible for creating the model (can take a little while):"
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -103,14 +103,51 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-22T21:59:18.014175+02:00"
+						"dateAndTimeString" : "2021-11-08T00:31:47.129862+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "TXVTWfeFDQCPSy/WBjwxkw=="
 				},
-				"code" : "root := Gt4EdxGlobals rootDirectory."
+				"code" : "root := Gt4EdxGlobals rootDirectory.\rmodel := Gt4EdxGlobals toggleModel"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-11-08T00:49:39.868531+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-11-08T00:50:21.61665+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "M2Y9RJ2MDQC/i0A7ANnIVg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Inspecting the above code leads to a model object that holds all detected toggle definitions in the system. Now that we have interesting entities, let's quickly see where in the treemap the toggles are used:"
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -126,7 +163,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-15T11:21:35.36293+02:00"
+						"dateAndTimeString" : "2021-11-08T00:49:52.540901+01:00"
 					}
 				},
 				"editEmail" : {
@@ -137,14 +174,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-22T20:08:25.124424+02:00"
+						"dateAndTimeString" : "2021-11-08T00:49:53.026251+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "mW8XWfeFDQCPSHsEBjwxkw=="
+					"uidString" : "Acn+RJ2MDQC/k6sQANnIVg=="
 				},
-				"code" : "importer := Gt4EdxImporter new.\nasts := importer parseDirectory: root.\nmodel := importer\n\timportASTs: asts;\n\tmodel"
+				"code" : "Gt4EdxGlobals treemapOfComponentsWithSelectedToggleUsers"
 			},
 			{
 				"__type" : "textSnippet",
@@ -171,7 +208,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-23T00:15:23.145101+02:00"
+						"dateAndTimeString" : "2021-11-08T00:49:39.874187+01:00"
 					}
 				},
 				"uid" : {
@@ -181,7 +218,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Inspecting the above code leads to a model object that holds all detected toggle definitions in the system. These entities contain a few properties and connections that we can use to answer questions. So, let's formulate some:"
+				"string" : "These entities contain a few properties and connections that we can use to answer questions. So, let's formulate some:"
 			},
 			{
 				"__type" : "textSnippet",
@@ -213,14 +250,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-23T21:18:32.743629+02:00"
+									"dateAndTimeString" : "2021-11-08T00:32:03.952944+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "Yjvx3I6GDQCrn6mjDXUnxQ=="
 							},
-							"code" : "model allEdxToggles select: [:each | each hasAnnotatedToggleName not ]"
+							"code" : "Gt4EdxGlobals toggleModel allEdxToggles select: [:each | each hasAnnotatedToggleName not ]"
 						}
 					]
 				},
@@ -285,14 +322,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-23T21:53:02.050593+02:00"
+									"dateAndTimeString" : "2021-11-08T00:32:05.771968+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "gdwvC5uGDQCr/e8mDXUnxQ=="
 							},
-							"code" : "model allEdxToggles select: [:each | each invalidName ]"
+							"code" : "Gt4EdxGlobals toggleModel allEdxToggles select: [:each | each invalidName ]"
 						}
 					]
 				},
@@ -389,14 +426,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-23T14:42:51.96525+02:00"
+						"dateAndTimeString" : "2021-11-08T00:32:08.465775+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "4zAUFJuGDQCsATXvDXUnxQ=="
 				},
-				"code" : "(model allEdxToggles reject: [:each | \r\teach containerFiles size > 1]) select: [:each | \r\t\teach uses anySatisfy: [:use | \r\t\t\tuse containerFiles anyOne edxTopComponent ~= each containerFiles anyOne edxTopComponent ] ]"
+				"code" : "(Gt4EdxGlobals toggleModel allEdxToggles reject: [:each | \r\teach containerFiles size > 1]) select: [:each | \r\t\teach uses anySatisfy: [:use | \r\t\t\tuse containerFiles anyOne edxTopComponent ~= each containerFiles anyOne edxTopComponent ] ]"
 			},
 			{
 				"__type" : "textSnippet",
@@ -449,7 +486,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-23T23:23:48.591316+02:00"
+						"dateAndTimeString" : "2021-11-08T00:40:52.43715+01:00"
 					}
 				},
 				"editEmail" : {
@@ -460,14 +497,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-23T23:28:53.493476+02:00"
+						"dateAndTimeString" : "2021-11-08T00:41:18.880084+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "BgevXqKGDQCxLquIDXUnxQ=="
+					"uidString" : "u3TNJJ2MDQCXL5syCF+YEQ=="
 				},
-				"code" : "dependencies := Dictionary new.\r(model allEdxToggles reject: [:each | \r\teach containerFiles size > 1]) do: [:toggle | \r\ttoggle uses do: [:use |\r\t\tassoc := (use containerFiles anyOne edxTopComponent -> toggle containerFiles anyOne edxTopComponent).\r\t\tdependencies \r\t\t\tat: assoc ifAbsentPut: [OrderedCollection new].\r\t\t(dependencies at: assoc) add: use ] ].\rm := GtMondrian new.\rm nodes \r\tstencil: [ :each | BrLabel new text: each name; aptitude: BrGlamorousLabelAptitude];\r\twith: ((dependencies keys collect: #key), (dependencies keys collect: #value)) asSet.\rm edges \r\tstencil: [:assoc | \r\t\tBlParabollaArcElement new \r\t\t\twhen: BlClickEvent do: [:e | e target phlow spawnObject: assoc value asMooseGroup. e consumed: true ];\r\t\t\tcurvatureFraction: 0.3;\r\t\t\tborder: (BlBorder paint: Color orange width: assoc value size / 40);\r\t\t\ttoHead: (BlArrowheadSimpleArrow new\r\t\t\t\t\tbackground: Color orange)];\r\tconnect: (dependencies associations reject: [:assoc | assoc key key = assoc key value ]) \r\tfrom: [ :assoc | assoc key key ] \r\tto: [ :assoc | assoc key value].\rm layout circle radius: 100.\rm "
+				"code" : "m := Gt4EdxGlobals paintToggleDependenciesWith: GtMondrian new."
 			}
 		]
 	},
