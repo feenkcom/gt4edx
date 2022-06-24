@@ -46,6 +46,7 @@ Gt4EdxGlobals class >> paintToggleDependenciesWith: m [
 
 { #category : #accessing }
 Gt4EdxGlobals class >> rootDirectory [
+	"this is the root directory for the whole project"
 	^ rootDirectory
 ]
 
