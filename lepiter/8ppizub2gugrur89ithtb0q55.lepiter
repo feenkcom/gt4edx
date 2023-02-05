@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:21.405697+02:00"
+						"dateAndTimeString" : "2023-02-05T21:11:50.028977+01:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Visualize the Organization of Python Files]]"
+				"string" : "[[Visualize the organization of Python files]]"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-24T09:21:25.877413+02:00"
+						"dateAndTimeString" : "2023-02-05T21:11:59.090869+01:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[How Are Toggles Defined and Used?]]"
+				"string" : "[[How are toggles defined and used?]]"
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-11-08T03:46:42.852224+01:00"
+						"dateAndTimeString" : "2023-02-05T21:12:07.108083+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Documenting a Live Toggle Example]]"
+				"string" : "[[Documenting a live toggle example]]"
 			}
 		]
 	},

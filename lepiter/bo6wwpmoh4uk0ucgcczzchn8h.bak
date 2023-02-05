@@ -99,12 +99,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2023-02-05T21:12:07.104532+01:00"
+			"dateAndTimeString" : "2021-08-24T20:03:35.339069+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Documenting a live toggle example"
+		"title" : "Documenting a Live Toggle Example"
 	},
 	"uid" : {
 		"__type" : "uuid",
