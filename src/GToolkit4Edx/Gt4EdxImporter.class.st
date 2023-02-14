@@ -10,7 +10,7 @@ Class {
 		'stringSearches',
 		'variableSearches'
 	],
-	#category : 'GToolkit4Edx-Importer'
+	#category : #'GToolkit4Edx-Importer'
 }
 
 { #category : #importing }
@@ -259,34 +259,34 @@ Gt4EdxImporter >> importTogglesIn: aNode [
 { #category : #importing }
 Gt4EdxImporter >> importTogglesInFeatures: aNode [
 	aNode
-		allNodesDo:
-			[ :each | 
-			((each isKindOf: PyMoreTestsNode) or: [ each isKindOf: PyDictorsetmakerNode ])
-				ifTrue:
-					[ ((each attributeNamed: #toggle) ifNil: [ each test attributeNamed: #toggle ])
-						ifNil:
-							[ | toggle source |
-							toggle := self ensureToggleNamed: 'FEATURES[''' , (self removeQuotes: each test source) , ''']'.
-							source := aNode topParent completeSource asString.
-							each test commentsBefore
-								do:
-									[ :comment | 
-									| famixComment |
-									famixComment := FAMIXComment new.
-									famixComment content: (source copyFrom: comment first to: comment last).
-									model add: famixComment.
-									currentFile addEntity: famixComment.
-									toggle addComment: famixComment ].
-							self addSourceFor: each test to: toggle.
-							self storeAST: each test into: toggle.
-							each test attributeNamed: #toggle put: toggle.
-							self registerSearchForNode: each test to: toggle ]
-						ifNotNil:
-							[ :toggle | 
-							| name |
-							name := self removeQuotes: each test source.
-							(name = toggle name or: [ (toggle name indexOfSubCollection: '''' , name , '''') > 0 ])
-								ifFalse: [ toggle invalidName: true ] ] ] ]
+		allNodesDo: [ :node | 
+			(node isKindOf: PyDictorsetmakerNode)
+				ifTrue: [ node objects
+						do: [ :each | 
+							(each attributeNamed: #toggle)
+								ifNil: [ | toggle source |
+									toggle := self
+											ensureToggleNamed: 'FEATURES[''' , (self removeQuotes: each source) , ''']'.
+									source := aNode topParent completeSource asString.
+									each commentsBefore
+										do: [ :comment | 
+											| famixComment |
+											famixComment := FAMIXComment new.
+											famixComment
+												content: (source copyFrom: comment first to: comment last).
+											model add: famixComment.
+											currentFile addEntity: famixComment.
+											toggle addComment: famixComment ].
+									self addSourceFor: each to: toggle.
+									self storeAST: each into: toggle.
+									each attributeNamed: #toggle put: toggle.
+									self registerSearchForNode: each to: toggle ]
+								ifNotNil: [ :toggle | 
+									| name |
+									name := self removeQuotes: each source.
+									(name = toggle name
+										or: [ (toggle name indexOfSubCollection: '''' , name , '''') > 0 ])
+										ifFalse: [ toggle invalidName: true ] ] ] ] ]
 ]
 
 { #category : #importing }
@@ -348,12 +348,9 @@ Gt4EdxImporter >> parseFile: aFile [
 Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 	| node |
 	node := aNode.
-	(node isKindOf: PySimpleStmtNode)
-		ifTrue: [ node := node stmts first ].
+	(node isKindOf: PySimpleStmtNode) ifTrue: [ node := node stmts first ].
 	(node isKindOf: PyDictorsetmakerNode)
-		ifTrue: [ node := node test ].
-	(node isKindOf: PyMoreTestsNode)
-		ifTrue: [ node := node test ].
+		ifTrue: [ node objects do: [ :each | self registerSearchForNode: each to: toggle ] ].
 	(node isKindOf: PyReturnNode)
 		ifTrue: [ node := node parentOfType: PyFuncdefNode ].
 	((node isKindOf: PyExprStmtNode) and: [ node assigns notEmpty ])
@@ -370,9 +367,8 @@ Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 						at: (self removeQuotes: node source)
 						ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
 			(node atom isKindOf: PySymbolNode)
-				ifTrue: [ ^ (variableSearches
-						at: node source
-						ifAbsentPut: [ OrderedCollection new ]) add: toggle ] ].
+				ifTrue: [ ^ (variableSearches at: node source ifAbsentPut: [ OrderedCollection new ])
+						add: toggle ] ].
 	(node isKindOf: PyFuncdefNode)
 		ifTrue: [ ^ (variableSearches
 				at: node fname source
