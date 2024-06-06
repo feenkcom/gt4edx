@@ -29,6 +29,11 @@ Gt4EdxImporter >> addSourceFor: aNode to: anEntity [
 	anEntity sourceAnchor addSourceAnchor: (self sourceAnchorFor: aNode)
 ]
 
+{ #category : #importing }
+Gt4EdxImporter >> argumentValue: node [
+	^ (node isKindOf: PyArgumentNode) ifTrue: [ node value ] ifFalse: [ node ]
+]
+
 { #category : #accessing }
 Gt4EdxImporter >> baseDirectory [
 	^ model rootFolder
@@ -42,14 +47,8 @@ Gt4EdxImporter >> baseDirectory: aFileReference [
 { #category : #importing }
 Gt4EdxImporter >> createToggle: aNode named: aString [
 	| name toggle |
-	(aNode parent isKindOf: PyPowerNode)
-		ifFalse: [ ^ false ].
-	aNode parent trailers isEmpty
-		ifTrue: [ ^ false ].
-	aNode parent trailers first lparenToken isNil
-		ifTrue: [ ^ false ].
-	(aNode attributeNamed: #toggle ifAbsent: [  ]) notNil
-		ifTrue: [ ^ true ].
+	(aNode parent isKindOf: PyFunctionCallExpressionNode) ifFalse: [ ^ false ].
+	(aNode attributeNamed: #toggle ifAbsent: [  ]) notNil ifTrue: [ ^ true ].
 	name := aString ifNil: [ self toggleNameFrom: aNode parent ].
 	toggle := self ensureToggleNamed: name.
 	toggle type: aNode nameToken source asSymbol.
@@ -57,8 +56,9 @@ Gt4EdxImporter >> createToggle: aNode named: aString [
 	currentFile addEntity: toggle.
 	self storeAST: aNode parent into: toggle.
 	self addSourceFor: aNode parent to: toggle.
-	aNode parent trailers size > 1
-		ifTrue: [ self createUse: aNode parent trailers second of: toggle ]
+	((aNode parent parent isKindOf: PyFunctionCallExpressionNode)
+		or: [ aNode parent parent isKindOf: PyFieldAccessExpressionNode ])
+		ifTrue: [ self createUse: aNode parent parent of: toggle ]
 		ifFalse: [ self registerSearchForNode: aNode parent parent to: toggle ].
 	^ true
 ]
@@ -194,7 +194,7 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 	| created |
 	created := false.
 	aNode
-		allNodesOfType: PySymbolNode
+		withAllNodesOfType: PyVariableExpressionNode
 		do: [ :each | 
 			(#('LegacyWaffleFlag' 'LegacyWaffleSwitch' 'WaffleFlag' 'WaffleSwitch' 'SettingToggle' 'SettingDictToggle' 'ExperimentWaffleFlag')
 				includes: each nameToken source)
@@ -205,7 +205,7 @@ Gt4EdxImporter >> importConstructedToggles: aNode named: aString [
 { #category : #importing }
 Gt4EdxImporter >> importDocumentCommentToggles: aNode [
 	aNode
-		allNodesOfType: PyStringNode
+		withAllNodesOfType: PyStringNode
 		do:
 			[ :each | 
 			(each value source beginsWith: '"""')
@@ -241,8 +241,8 @@ Gt4EdxImporter >> importDocumentCommentToggles: aNode [
 { #category : #importing }
 Gt4EdxImporter >> importFeatureToggles: aNode [
 	aNode
-		allNodesOfType: PyExprStmtNode
-		do: [ :each | each testlist source = 'FEATURES' ifTrue: [ self importTogglesInFeatures: each ] ]
+		withAllNodesOfType: PyAssignmentStatementNode
+		do: [ :each | each lhs source = 'FEATURES' ifTrue: [ self importTogglesInFeatures: each ] ]
 ]
 
 { #category : #importing }
@@ -259,51 +259,48 @@ Gt4EdxImporter >> importTogglesIn: aNode [
 { #category : #importing }
 Gt4EdxImporter >> importTogglesInFeatures: aNode [
 	aNode
-		allNodesDo: [ :node | 
-			(node isKindOf: PyDictorsetmakerNode)
-				ifTrue: [ node objects
-						do: [ :each | 
-							(each attributeNamed: #toggle)
-								ifNil: [ | toggle source |
-									toggle := self
-											ensureToggleNamed: 'FEATURES[''' , (self removeQuotes: each source) , ''']'.
-									source := aNode topParent completeSource asString.
-									each commentsBefore
-										do: [ :comment | 
-											| famixComment |
-											famixComment := FAMIXComment new.
-											famixComment
-												content: (source copyFrom: comment first to: comment last).
-											model add: famixComment.
-											currentFile addEntity: famixComment.
-											toggle addComment: famixComment ].
-									self addSourceFor: each to: toggle.
-									self storeAST: each into: toggle.
-									each attributeNamed: #toggle put: toggle.
-									self registerSearchForNode: each to: toggle ]
-								ifNotNil: [ :toggle | 
-									| name |
-									name := self removeQuotes: each source.
-									(name = toggle name
-										or: [ (toggle name indexOfSubCollection: '''' , name , '''') > 0 ])
-										ifFalse: [ toggle invalidName: true ] ] ] ] ]
+		withAllNodesOfType: PyDictionaryExpressionNode
+		do: [ :node | 
+			node expressions
+				do: [ :each | 
+					(each object attributeNamed: #toggle)
+						ifNil: [ | toggle source |
+							toggle := self
+									ensureToggleNamed: 'FEATURES[''' , (self removeQuotes: each object source) , ''']'.
+							source := aNode topParent completeSource asString.
+							each object commentsBefore
+								do: [ :comment | 
+									| famixComment |
+									famixComment := FAMIXComment new.
+									famixComment content: (source copyFrom: comment first to: comment last).
+									model add: famixComment.
+									currentFile addEntity: famixComment.
+									toggle addComment: famixComment ].
+							self addSourceFor: each object to: toggle.
+							self storeAST: each object into: toggle.
+							each object attributeNamed: #toggle put: toggle.
+							self registerSearchForNode: each object to: toggle ]
+						ifNotNil: [ :toggle | 
+							| name |
+							name := self removeQuotes: each object source.
+							(name = toggle name
+								or: [ (toggle name indexOfSubCollection: '''' , name , '''') > 0 ])
+								ifFalse: [ toggle invalidName: true ] ] ] ]
 ]
 
 { #category : #importing }
 Gt4EdxImporter >> importUsesIn: aNode [
 	currentFile := self ensureFileNamed: aNode filename asFileReference.
 	aNode
-		allNodesDo: [ :each | 
-			(each isKindOf: PySymbolNode)
+		withAllNodesDo: [ :each | 
+			(each isKindOf: PyVariableExpressionNode)
 				ifTrue: [ (variableSearches at: each source ifAbsent: [ #() ])
 						do: [ :toggle | self createUse: each of: toggle ] ].
-			((each isKindOf: PyTrailerNode) and: [ each nameToken notNil ])
+			(each isKindOf: PyFieldAccessExpressionNode)
 				ifTrue: [ (variableSearches at: each nameToken source ifAbsent: [ #() ])
 						do: [ :toggle | self createUse: each of: toggle ] ].
 			(each isKindOf: PyStringNode)
-				ifTrue: [ (stringSearches
-						at: (self removeQuotes: each value source)
-						ifAbsent: [ #() ])
+				ifTrue: [ (stringSearches at: (self removeQuotes: each value source) ifAbsent: [ #() ])
 						do: [ :toggle | self createUse: each of: toggle ] ] ]
 ]
 
@@ -348,28 +345,27 @@ Gt4EdxImporter >> parseFile: aFile [
 Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 	| node |
 	node := aNode.
-	(node isKindOf: PySimpleStmtNode) ifTrue: [ node := node stmts first ].
-	(node isKindOf: PyDictorsetmakerNode)
-		ifTrue: [ node objects do: [ :each | self registerSearchForNode: each to: toggle ] ].
-	(node isKindOf: PyReturnNode)
-		ifTrue: [ node := node parentOfType: PyFuncdefNode ].
-	((node isKindOf: PyExprStmtNode) and: [ node assigns notEmpty ])
-		ifTrue: [ ^ (variableSearches
-				at: node testlist source
-				ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
+	(node isKindOf: PyExpressionStatementNode) ifTrue: [ node := node expression ].
+	(node isKindOf: PyDictionaryExpressionNode)
+		ifTrue: [ node expressions
+				do: [ :each | self registerSearchForNode: each object to: toggle ] ].
+	(node isKindOf: PyReturnStatementNode)
+		ifTrue: [ node := node parentOfType: PyFunctionDefinitionNode ].
+	(node isKindOf: PyAssignmentStatementNode)
+		ifTrue: [ ^ (variableSearches at: node lhs source ifAbsentPut: [ OrderedCollection new ])
+				add: toggle ].
 	(node isKindOf: PyArgumentNode)
 		ifTrue: [ ^ (variableSearches
-				at: node test source
+				at: node name source
 				ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
-	(node isKindOf: PyPowerNode)
-		ifTrue: [ (node atom isKindOf: PyStringsNode)
-				ifTrue: [ ^ (stringSearches
-						at: (self removeQuotes: node source)
-						ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
-			(node atom isKindOf: PySymbolNode)
-				ifTrue: [ ^ (variableSearches at: node source ifAbsentPut: [ OrderedCollection new ])
-						add: toggle ] ].
-	(node isKindOf: PyFuncdefNode)
+	(node isKindOf: PyStringNode)
+		ifTrue: [ ^ (stringSearches
+				at: (self removeQuotes: node source)
+				ifAbsentPut: [ OrderedCollection new ]) add: toggle ].
+	(node isKindOf: PyVariableExpressionNode)
+		ifTrue: [ ^ (variableSearches at: node source ifAbsentPut: [ OrderedCollection new ])
+				add: toggle ].
+	(node isKindOf: PyFunctionDefinitionNode)
 		ifTrue: [ ^ (variableSearches
 				at: node fname source
 				ifAbsentPut: [ OrderedCollection new ]) add: toggle ]
@@ -399,26 +395,20 @@ Gt4EdxImporter >> storeAST: aNode into: anEntity [
 { #category : #importing }
 Gt4EdxImporter >> toggleNameFrom: aNode [
 	| args |
-	args := aNode trailers first arguments.
+	args := aNode arguments.
 	args size = 5
-		ifTrue: [ aNode atom source = 'ExperimentWaffleFlag'
-				ifTrue: [ ^ (self
-						removeQuotes: (args first test2 ifNil: [ args first test ]) source)
-						, '.'
-						,
-							(self
-								removeQuotes: (args second test2 ifNil: [ args second test ]) source) ]
+		ifTrue: [ aNode receiver source = 'ExperimentWaffleFlag'
+				ifTrue: [ ^ (self removeQuotes: (self argumentValue: args first) source) , '.'
+						, (self removeQuotes: (self argumentValue: args second) source) ]
 				ifFalse: [ ^ self
-						removeQuotes: (self namespaceNameFor: (args first test2 ifNil: [ args first test ])) ] ].
+						removeQuotes: (self
+								namespaceNameFor: ((args first isKindOf: PyArgumentNode)
+										ifTrue: [ args first value ]
+										ifFalse: [ args first ])) ] ].
 	(args size = 2 or: [ args size = 5 ])
-		ifTrue: [ ^ self
-				removeQuotes: (self namespaceNameFor: (args first test2 ifNil: [ args first test ])) ].
+		ifTrue: [ ^ self removeQuotes: (self namespaceNameFor: (self argumentValue: args first)) ].
 	(args size = 4 or: [ args size = 3 ])
-		ifTrue: [ ^ (self
-				removeQuotes: (args first test2 ifNil: [ args first test ]) source)
-				, '.'
-				,
-					(self
-						removeQuotes: (args second test2 ifNil: [ args second test ]) source) ].
+		ifTrue: [ ^ (self removeQuotes: (self argumentValue: args first) source) , '.'
+				, (self removeQuotes: (self argumentValue: args second) source) ].
 	self error: 'unknown toggle type'
 ]

@@ -1,7 +1,7 @@
-Extension { #name : #PyImportNode }
+Extension { #name : #PyImportStatementNode }
 
 { #category : #'*GToolkit4Edx' }
-PyImportNode >> gtEdxLegacyExplanationFor: aView [
+PyImportStatementNode >> gtEdxLegacyExplanationFor: aView [
 	<gtView>
 	| isLegacy isSettings |
 	isLegacy := isSettings := false.

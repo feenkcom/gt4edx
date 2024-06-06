@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fileSystem'
 	],
-	#category : 'GToolkit4Edx-Slides'
+	#category : #'GToolkit4Edx-Slides'
 }
 
 { #category : #switch }
@@ -234,11 +234,11 @@ Gt4EdxSlideshow >> switchStyler [
 	^ (GtSmaCCParserStyler forParser: PythonParser)
 		stylerRules:
 			{(GtSmaCCNodeStylerRule
-				nodeClassName: #PyImportNode
+				nodeClassName: #PyImportStatementNode
 				styleBlock:
 					[ :styler :node :text | node names do: [ :each | self style: each in: text ] ]).
 			(GtSmaCCNodeStylerRule
-				nodeClassName: #PySymbolNode
+				nodeClassName: #PyVariableExpressionNode
 				styleBlock: [ :styler :node :text | 
 					(self style: node nameToken in: text)
 						ifTrue: [ (text from: node startPosition - 1 to: node startPosition - 1)
