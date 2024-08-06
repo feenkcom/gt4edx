@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'definition'
 	],
-	#category : 'GToolkit4Edx-Model'
+	#category : #'GToolkit4Edx-Model'
 }
 
 { #category : #accessing }
@@ -20,6 +20,15 @@ Gt4EdxToggleUse >> definition: aDefinition [
 		update: #uses
 		from: self definition
 		to: aDefinition
+]
+
+{ #category : #accessing }
+Gt4EdxToggleUse >> gtDefinitionSourceFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Definition complete source';
+		object: [ self definition ];
+		view: #gtSourceFor:
 ]
 
 { #category : #accessing }
