@@ -242,7 +242,9 @@ Gt4EdxImporter >> importDocumentCommentToggles: aNode [
 Gt4EdxImporter >> importFeatureToggles: aNode [
 	aNode
 		withAllNodesOfType: PyAssignmentStatementNode
-		do: [ :each | each lhs source = 'FEATURES' ifTrue: [ self importTogglesInFeatures: each ] ]
+		do: [ :each | 
+			(each variables anySatisfy: [ :e | e source = 'FEATURES' ])
+				ifTrue: [ self importTogglesInFeatures: each ] ]
 ]
 
 { #category : #importing }
@@ -352,8 +354,10 @@ Gt4EdxImporter >> registerSearchForNode: aNode to: toggle [
 	(node isKindOf: PyReturnStatementNode)
 		ifTrue: [ node := node parentOfType: PyFunctionDefinitionNode ].
 	(node isKindOf: PyAssignmentStatementNode)
-		ifTrue: [ ^ (variableSearches at: node lhs source ifAbsentPut: [ OrderedCollection new ])
-				add: toggle ].
+		ifTrue: [ ^ node variables
+				do: [ :each | 
+					(variableSearches at: each source ifAbsentPut: [ OrderedCollection new ])
+						add: toggle ] ].
 	(node isKindOf: PyArgumentNode)
 		ifTrue: [ ^ (variableSearches
 				at: node name source
